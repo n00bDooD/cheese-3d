@@ -42,7 +42,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\Users\SPL10Per\Desktop\Mappar och filer\libs\glfw-2.7.6.bin.WIN32\include;C:\Users\SPL10Per\Desktop\Mappar och filer\libs\glew-1.9.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\SPL10Per\Desktop\Mappar och filer\libs\rapidxml-1.13;C:\Users\SPL10Per\Desktop\Mappar och filer\libs\glm;C:\Users\SPL10Per\Desktop\Mappar och filer\libs\glfw-2.7.6.bin.WIN32\include;C:\Users\SPL10Per\Desktop\Mappar och filer\libs\glew-1.9.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -64,14 +64,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="glewInit.cpp" />
-    <ClCompile Include="glfwInit.cpp" />
+    <ClCompile Include="CheeseRenderer.cpp" />
+    <ClCompile Include="DataLoader.cpp" />
+    <ClCompile Include="Initialize.cpp" />
+    <ClCompile Include="Quad.cpp" />
     <ClCompile Include="startup.cpp" />
+    <ClCompile Include="Vertices.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="glewInit.h" />
-    <ClInclude Include="glfwInit.h" />
+    <ClInclude Include="CheeseRenderer.h" />
+    <ClInclude Include="DataLoader.h" />
+    <ClInclude Include="Initialize.h" />
+    <ClInclude Include="Quad.h" />
     <ClInclude Include="shaders.h" />
+    <ClInclude Include="Vertices.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

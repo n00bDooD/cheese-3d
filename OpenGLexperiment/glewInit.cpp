@@ -2,7 +2,7 @@
 
 GLuint InitGlew (void) {
 	if(!glewInit()){
-		return 1001;
+		return (GLuint)1001;
 	}
-	return 0;
+	return (GLuint)0;
 }

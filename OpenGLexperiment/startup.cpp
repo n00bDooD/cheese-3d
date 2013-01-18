@@ -1,5 +1,5 @@
-#include "glewInit.h"
-#include "glfwInit.h"
+#include "Initialize.h"
+#include "DataLoader.h"
 #include <stdlib.h>
 #include <iostream>
 #include <stdio.h>
@@ -21,18 +21,25 @@ int main (void){
 }
 
 int application( void ){
+	const GLuint sizeX = 300;
+	const GLuint sizeY = 300;
+	const char* title = "Cheese 3D";
 	bool running = GL_TRUE;
 
-	InitGlfw();
-
-	if(!glfwOpenWindow(300,300,0,0,0,0,0,0,GLFW_WINDOW )){
-		glfwTerminate();
-		return 1002;
+	{
+		GLuint err = initialize();
+		if(err != 0){
+			return err;
+		}
 	}
-	glfwSetWindowTitle ("Cheese 3D");
 
-	InitGlew();
+	if(!glfwOpenWindow(sizeX,sizeY,0,0,0,0,0,0,GLFW_WINDOW )){
+		glfwTerminate();
+		return (GLuint)1002;
+	}
+	glfwSetWindowTitle (title);
 
+	//readFile("Example.xml");
 
 	while (running){
 		glClearColor(0.2f,0.2f,0.2f,1.0f);
