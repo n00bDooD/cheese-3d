@@ -10,10 +10,10 @@ protected:
 	VertexType vertexType_;
 public:
 	quad(vertex,vertex,vertex,vertex,VertexType);
-	~quad(void);
 	glm::uint* getElements();
-	std::vector<glm::mediump_float> getVertices();
+	std::vector<glm::mediump_float> getRawVertexData();
 	glm::vec3 getNormal();
+	vertex* getVertices();
 } ;
 
 #endif

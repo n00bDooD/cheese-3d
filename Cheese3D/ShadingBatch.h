@@ -1,10 +1,10 @@
 #ifndef SHADINGBATCH_H
 #define SHADINGBATCH_H
 
+#include "Material.h"
 #include "Vertices.h"
 #include <vector>
 #include "Quad.h"
-#include "Material.h"
 #include <glm/glm.hpp>
 
 #define GLEW_STATIC
@@ -25,9 +25,15 @@ protected:
 public:
 	shadingBatch(VertexType,material*);
 	GLuint renderBatch (void);
+	void addPrimitives (quad*);
 private:
 	void initBatch(void);
-	GLuint setupBatch (void);
+	void setupBatch (void);
+	void setVertexBuffer(void);
+	void updateVertexBuffer(void);
+	void setElementBuffer(void);
+	void updateElementBuffer(void);
+	void setVertexAttributes(void);
 } ;
 
 #endif

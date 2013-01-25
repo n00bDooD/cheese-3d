@@ -11,6 +11,7 @@
 #include "Vertices.h"
 #include "Global.h"
 #include "UpdateLoop.h"
+#include <assert.h>
 
 using namespace std;
 
@@ -30,7 +31,6 @@ int main (void){
 }
 
 int application( void ){
-
 	bool running = GL_TRUE;
 
 	if(true) {
@@ -43,12 +43,17 @@ int application( void ){
 
 	material defaultMaterial(vertexSource,fragmentSource);
 
-	VertexType vType = simpleVertex;
-
-	shadingBatch defaultBatch(vType,&defaultMaterial);
+	shadingBatch defaultBatch(normalVertex,&defaultMaterial);
 	::renderer.addBatch(&defaultBatch);
 
-
+	quad primitive (
+		vertex(glm::vec3(-0.5,-0.5,0),glm::vec3(0,0,1)),
+		vertex(glm::vec3(0.5,-0.5,0),glm::vec3(0,0,1)),
+		vertex(glm::vec3(0.5,0.5,0),glm::vec3(0,0,1)),
+		vertex(glm::vec3(-0.5,0.5,0),glm::vec3(0,0,1)),
+		normalVertex
+		);
+	defaultBatch.addPrimitives(&primitive);
 
 	GLuint loopErr = 0;
 	while (running){

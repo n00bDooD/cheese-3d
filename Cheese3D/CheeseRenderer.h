@@ -1,6 +1,7 @@
 #ifndef CHEESERENDERER_H
 #define	CHEESERENDERER_H
 
+#include "Material.h"
 #include "ShadingBatch.h"
 #include <stdlib.h>
 #include <vector>
@@ -15,6 +16,7 @@
 class cheeseRenderer {
 private:
 	std::vector<shadingBatch> batches_;
+	std::vector<material> materials_;
 public:
 	cheeseRenderer(void);
 	void addBatch(shadingBatch*);

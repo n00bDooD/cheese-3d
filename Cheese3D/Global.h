@@ -1,8 +1,14 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-#include "CheeseRenderer.h"
+#define GLEW_STATIC
+#include <GL\glew.h>
 
-typedef unsigned int uint;
+#define GLFWDLL
+#include <GL\glfw.h>
+
+#include <assert.h>
+
+typedef GLuint uint;
 
 #endif

@@ -3,6 +3,7 @@
 
 #include "Global.h"
 #include "CheeseRenderer.h"
+#include "Material.h"
 
 uint update(uint,cheeseRenderer*);
 

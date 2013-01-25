@@ -8,10 +8,6 @@ vertex::vertex() : simpleVertex(glm::vec3()){
 	normal_ = glm::vec3(0,0,1);
 }
 
-vertex::~vertex(void){
-	delete &normal_;
-}
-
 coloredVertex::coloredVertex(glm::vec3 position,glm::vec3 normal) : vertex(position,normal){
 	color_ = glm::vec4((glm::mediump_float)1,(glm::mediump_float)1,(glm::mediump_float)1,(glm::mediump_float)1);
 }
@@ -23,19 +19,12 @@ coloredVertex::coloredVertex() : vertex(glm::vec3(),glm::vec3(0,0,1)){
 coloredVertex::coloredVertex(glm::vec3 position,glm::vec3 normal, glm::vec4 color) : vertex(position,normal){
 	color_ = color;
 }
-coloredVertex::~coloredVertex(void){
-	delete &normal_;
-	delete &color_;
-}
 
 simpleVertex::simpleVertex(){
 	position_ = glm::vec3();
 }
 simpleVertex::simpleVertex(glm::vec3 position){
 	position_ = position;
-}
-simpleVertex::~simpleVertex(){
-	delete &position_;
 }
 
 std::vector<glm::mediump_float> simpleVertex::getData(){

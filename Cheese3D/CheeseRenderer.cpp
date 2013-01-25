@@ -16,5 +16,6 @@ cheeseRenderer::cheeseRenderer(void){
 }
 
 void cheeseRenderer::addBatch(shadingBatch* batch){
+	assert(batch != NULL);
 	batches_.push_back(*batch);
 }

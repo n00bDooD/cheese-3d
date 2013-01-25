@@ -1,14 +1,25 @@
 #include "Material.h"
 
-material::material(char* vertexShader, char* fragmentShader){
-	vertexShader_ = vertexShader;
-	fragmentShader_ = fragmentShader;
+material::material(const char* vertexShader, const char* fragmentShader){
+	assert(vertexShader != NULL);
+	assert(fragmentShader != NULL);
+	glShaderSource(fragmentShader_, 1,&fragmentShader,NULL);
+	glShaderSource(vertexShader_, 1,&vertexShader,NULL);
 }
 
-char* material::getFragmentShader(void){
-	return fragmentShader_;
+
+void material::compileShaders(void){
+	glCompileShader(vertexShader_);
+	glCompileShader(fragmentShader_);
+
+	shaderProgram_ = glCreateProgram();
+	glAttachShader(shaderProgram_, vertexShader_);
+	glAttachShader(shaderProgram_, fragmentShader_);
+	glBindFragDataLocation(shaderProgram_,0,"outColor");
+
+	glLinkProgram(shaderProgram_);
 }
 
-char* material::getVertexShader(void){
-	return vertexShader_;
+unsigned int material::getShaderProgram(){
+	return shaderProgram_;
 }

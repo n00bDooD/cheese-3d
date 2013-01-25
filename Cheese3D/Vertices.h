@@ -12,7 +12,6 @@ protected:
 public:
 	simpleVertex(void);
 	simpleVertex(glm::vec3);
-	~simpleVertex(void);
 	std::vector<glm::mediump_float> getData();
 } ;
 
@@ -22,7 +21,6 @@ protected:
 public:
 	vertex (glm::vec3,glm::vec3);
 	vertex(void);
-	~vertex(void);
 	std::vector<glm::mediump_float> getData();
 } ;
 
@@ -33,7 +31,6 @@ public:
 	coloredVertex(void);
 	coloredVertex(glm::vec3,glm::vec3,glm::vec4);
 	coloredVertex(glm::vec3,glm::vec3);
-	~coloredVertex(void);
 	std::vector<glm::mediump_float> getData();
 } ;
 

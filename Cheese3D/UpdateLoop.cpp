@@ -1,6 +1,7 @@
 #include "UpdateLoop.h"
 
 uint update(uint loopErr,cheeseRenderer* renderer){
+	assert(renderer != NULL);
 	loopErr = renderer->draw();
 	if(loopErr != 0){
 		return loopErr;
