@@ -1,6 +1,9 @@
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
 #include "Initialize.h"
 #include "DataLoader.h"
-#include <stdlib.h>
 #include <iostream>
 #include <cstring>
 #include <string>
@@ -40,11 +43,11 @@ int application( void ){
 			return err;
 		}
 	}
+	material* defaultMaterial = new material(vertexSource,fragmentSource);
 
-	material defaultMaterial(vertexSource,fragmentSource);
+	shadingBatch* defaultBatch = new shadingBatch(normalVertex,defaultMaterial);
 
-	shadingBatch defaultBatch(normalVertex,&defaultMaterial);
-	::renderer.addBatch(&defaultBatch);
+	::renderer.addBatch(defaultBatch);
 
 	quad primitive (
 		vertex(glm::vec3(-0.5,-0.5,0),glm::vec3(0,0,1)),
@@ -53,7 +56,7 @@ int application( void ){
 		vertex(glm::vec3(-0.5,0.5,0),glm::vec3(0,0,1)),
 		normalVertex
 		);
-	defaultBatch.addPrimitives(&primitive);
+	defaultBatch->addPrimitives(&primitive);
 
 	GLuint loopErr = 0;
 	while (running){

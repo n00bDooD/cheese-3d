@@ -1,4 +1,5 @@
 #include "ShadingBatch.h"
+#include <iostream>
 
 shadingBatch::shadingBatch(VertexType vertType,material*  mat){
 	assert(mat != NULL);
@@ -12,6 +13,7 @@ GLuint shadingBatch::renderBatch(void){
 
 	setupBatch();
 
+
 	glDrawArrays(GL_TRIANGLES,0,vertices_.size());
 	return err;
 }
@@ -22,6 +24,8 @@ void shadingBatch::initBatch(void){
 
 	glGenBuffers(1,&VBO_);
 	glGenBuffers(1,&EBO_);
+
+	material_->getShaderProgram();
 
 	setVertexAttributes();
 
@@ -90,7 +94,6 @@ void shadingBatch::addPrimitives(quad* primitive){
 	}
 	for(uint i = 0;i < 6;i++){
 		GLuint value = primitive->getElements()[i];
-		assert ( value != NULL);
 		elements_.push_back(value);
 	}
 	updateVertexBuffer();

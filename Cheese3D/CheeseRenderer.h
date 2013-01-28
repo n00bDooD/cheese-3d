@@ -15,7 +15,7 @@
 
 class cheeseRenderer {
 private:
-	std::vector<shadingBatch> batches_;
+	std::vector<shadingBatch*> batches_;
 	std::vector<material> materials_;
 public:
 	cheeseRenderer(void);

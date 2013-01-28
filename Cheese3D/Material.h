@@ -13,6 +13,7 @@ class material {
 protected:
 	GLuint fragmentShader_;
 	GLuint vertexShader_;
+	bool compiled_;
 	unsigned int shaderProgram_;
 	void compileShaders(void);
 public:
