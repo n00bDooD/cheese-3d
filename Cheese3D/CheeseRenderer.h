@@ -1,11 +1,9 @@
 #ifndef CHEESERENDERER_H
 #define	CHEESERENDERER_H
 
-#include "Material.h"
 #include "ShadingBatch.h"
 #include <stdlib.h>
 #include <vector>
-#include "Quad.h"
 
 #define GLEW_STATIC
 #include <GL\glew.h>
@@ -15,11 +13,11 @@
 
 class cheeseRenderer {
 private:
-	std::vector<shadingBatch*> batches_;
-	std::vector<material> materials_;
+	std::vector<shadingBatch> batches_;
+	void initBatch (GLuint);
 public:
-	cheeseRenderer(void);
-	void addBatch(shadingBatch*);
+	cheeseRenderer(shadingBatch);
+	void addBatch(shadingBatch);
 	GLuint draw(void);
 } ;
 

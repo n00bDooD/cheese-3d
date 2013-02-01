@@ -1,24 +1,15 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
 
-#include "Global.h"
-
-#define GLEW_STATIC
-#include <GL\glew.h>
-
-#define GLFWDLL
-#include <GL\glfw.h>
+#include "Shader.h"
 
 class material {
 protected:
-	GLuint fragmentShader_;
-	GLuint vertexShader_;
-	bool compiled_;
-	unsigned int shaderProgram_;
-	void compileShaders(void);
+	shader shader_;
 public:
-	material(const char*,const  char*);
-	unsigned int getShaderProgram(void);
+	material (const shader* shaderProgram);
+
+	void compileShader();
 } ;
 
 #endif

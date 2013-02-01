@@ -72,11 +72,12 @@
     <ClCompile Include="DataValue.cpp" />
     <ClCompile Include="Initialize.cpp" />
     <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Quad.cpp" />
+    <ClCompile Include="Primitive.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShadingBatch.cpp" />
     <ClCompile Include="application.cpp" />
     <ClCompile Include="UpdateLoop.cpp" />
-    <ClCompile Include="Vertices.cpp" />
+    <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CheeseRenderer.h" />
@@ -85,11 +86,13 @@
     <ClInclude Include="Global.h" />
     <ClInclude Include="Initialize.h" />
     <ClInclude Include="Material.h" />
-    <ClInclude Include="Quad.h" />
+    <ClInclude Include="Primitive.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="shaders.h" />
     <ClInclude Include="ShadingBatch.h" />
     <ClInclude Include="UpdateLoop.h" />
-    <ClInclude Include="Vertices.h" />
+    <ClInclude Include="Vertex.h" />
+    <ClInclude Include="VertexDataFormat.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

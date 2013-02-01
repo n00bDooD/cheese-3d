@@ -10,8 +10,9 @@
 #include "CheeseRenderer.h"
 #include "ShadingBatch.h"
 #include "Material.h"
+#include "Shader.h"
+#include "Vertex.h"
 #include "shaders.h"
-#include "Vertices.h"
 #include "Global.h"
 #include "UpdateLoop.h"
 #include <assert.h>
@@ -19,7 +20,6 @@
 using namespace std;
 
 int application (void);
-cheeseRenderer renderer;
 
 
 int main (void){
@@ -43,33 +43,29 @@ int application( void ){
 			return err;
 		}
 	}
-	material* defaultMaterial = new material(vertexSource,fragmentSource);
 
-	shadingBatch* defaultBatch = new shadingBatch(normalVertex,defaultMaterial);
-
-	::renderer.addBatch(defaultBatch);
-
-	quad primitive (
-		vertex(glm::vec3(-0.5,-0.5,0),glm::vec3(0,0,1)),
-		vertex(glm::vec3(0.5,-0.5,0),glm::vec3(0,0,1)),
-		vertex(glm::vec3(0.5,0.5,0),glm::vec3(0,0,1)),
-		vertex(glm::vec3(-0.5,0.5,0),glm::vec3(0,0,1)),
-		normalVertex
-		);
-	defaultBatch->addPrimitives(&primitive);
 
 	GLuint loopErr = 0;
-	while (running){
-		loopErr = update(loopErr,&renderer);
-		if(loopErr != 0 && loopErr != 1){
-			break;
-		} else if (loopErr == 1){
-			loopErr = 0;
-			break;
+	{
+		shader* defaultShader = new shader(fragmentSource,vertexSource);
+		material* defaultMaterial = new material(defaultShader);
+		vertexAttribLayout* defaultVertexData = new vertexAttribLayout();
+		shadingBatch* batch = new shadingBatch(*defaultVertexData,*defaultMaterial);
+		cheeseRenderer renderer(*batch);
+
+		delete batch;
+		delete defaultVertexData;
+		
+		while (running){
+			loopErr = update(loopErr,&renderer);
+			if(loopErr != 0 && loopErr != 1){
+				break;
+			} else if (loopErr == 1){
+				loopErr = 0;
+				break;
+			}
 		}
 	}
-
-
 	glfwTerminate();
 	return loopErr;
 }

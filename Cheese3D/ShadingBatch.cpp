@@ -1,101 +1,46 @@
 #include "ShadingBatch.h"
 #include <iostream>
 
-shadingBatch::shadingBatch(VertexType vertType,material*  mat){
-	assert(mat != NULL);
-	vertexType_ = vertType;
-	material_ = mat;
-	initBatch();
+
+shadingBatch::~shadingBatch(){
+	primitives_.clear();
 }
 
-GLuint shadingBatch::renderBatch(void){
+shadingBatch::shadingBatch(const vertexAttribLayout layout, const material batchMaterial){
+	dataFormat_ = layout;
+	batchMaterial_ = batchMaterial;
+}
+
+GLuint shadingBatch::updateBatch(void){
 	GLuint err = 0;
 
-	setupBatch();
-
-
-	glDrawArrays(GL_TRIANGLES,0,vertices_.size());
+	updatePrimitives();
 	return err;
 }
 
-void shadingBatch::initBatch(void){
-	glGenVertexArrays(1,&VAO_);
-	glBindVertexArray(VAO_);
-
-	glGenBuffers(1,&VBO_);
-	glGenBuffers(1,&EBO_);
-
-	material_->getShaderProgram();
-
-	setVertexAttributes();
-
-	setVertexBuffer();
-	updateVertexBuffer();
-
-	setElementBuffer();
-	updateElementBuffer();
-}
-
-void shadingBatch::setVertexBuffer(){
-	glBindBuffer(GL_ARRAY_BUFFER,VBO_);
-}
-
-void shadingBatch::updateVertexBuffer(){
-	glBufferData( GL_ARRAY_BUFFER, sizeof( vertices_.data() ), vertices_.data(), GL_STATIC_DRAW );
-}
-
-void shadingBatch::setElementBuffer(){
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,EBO_);
-}
-
-void shadingBatch::updateElementBuffer(){
-	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, EBO_ );
-	glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof( elements_.data() ), elements_.data(), GL_STATIC_DRAW );
-}
-
-void shadingBatch::setVertexAttributes(){
-	return;
-	if(vertexType_ == simpleVertex){
-		GLint posAttrib = glGetAttribLocation(material_->getShaderProgram(),"position");
-		glEnableVertexAttribArray(posAttrib);
-		glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE,0,0);
+void shadingBatch::updatePrimitives(void){
+	bool rebuild = false;
+	for(GLuint i = 0 ; i > primitives_.size() ; i++){
+		/*
+			Check if any of the primitives in this batch has been updated - I.E if they moved, rotated or scaled. if so, rebuild ALL.
+		*/
+		if(primitives_[i]->isCached() != true){ //TODO: Figure out a solution that doesnt involve rebuilding ALL objects in the batch
+			rebuild = true;
+		}
 	}
-	if(vertexType_ == normalVertex){
-		GLint posAttrib = glGetAttribLocation(material_->getShaderProgram(),"position");
-		GLint normalAttrib = glGetAttribLocation(material_->getShaderProgram(),"normal");
-		glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE,0,(void*)(3 * sizeof(glm::vec3)));
-		glVertexAttribPointer(normalAttrib, 3, GL_FLOAT, GL_TRUE,3 * sizeof(glm::vec3),(void*)(3 * sizeof(glm::vec3)));
-		glEnableVertexAttribArray(posAttrib);
-		glEnableVertexAttribArray(normalAttrib);
-	}
-	if(vertexType_ == coloredVertex){
-		GLint posAttrib = glGetAttribLocation(material_->getShaderProgram(),"position");
-		GLint normalAttrib = glGetAttribLocation(material_->getShaderProgram(),"normal");
-		GLint colorAttrib = glGetAttribLocation(material_->getShaderProgram(),"color");
-		glEnableVertexAttribArray(posAttrib);
-		glEnableVertexAttribArray(normalAttrib);
-		glEnableVertexAttribArray(colorAttrib);
-		glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE,0,(void*)(7 * sizeof(glm::vec3)));
-		glVertexAttribPointer(normalAttrib, 3, GL_FLOAT, GL_TRUE,7 * sizeof(glm::vec3),(void*)(3 * sizeof(glm::vec3)));
-		glVertexAttribPointer(colorAttrib, 4, GL_FLOAT, GL_FALSE,6 * sizeof(glm::vec3),(void*)(6 * sizeof(glm::vec3)));
+	if(rebuild){
+		vertices_.clear();
+		for(GLuint i = 0 ; i > primitives_.size() ; i++){
+			std::vector<vertex> a = primitives_[i]->getVertices();
+			vertices_.insert(vertices_.end(), a.begin(), a.end());
+
+			std::vector<GLuint> b = primitives_[i]->getElements();
+			elements_.insert(elements_.end(), b.begin(), b.end());
+		}
 	}
 }
 
-void shadingBatch::setupBatch(void){
-	glUseProgram(material_->getShaderProgram());
-	glBindVertexArray(VAO_);
-}
-
-void shadingBatch::addPrimitives(quad* primitive){
-	assert(primitive != NULL);
-	for(uint i = 0;i < 4;i++){
-		vertex value = primitive->getVertices()[i];
-		vertices_.push_back(value);
-	}
-	for(uint i = 0;i < 6;i++){
-		GLuint value = primitive->getElements()[i];
-		elements_.push_back(value);
-	}
-	updateVertexBuffer();
-	updateElementBuffer();
+void shadingBatch::addPrimitive(primitive* primitiveObject){
+	primitives_.push_back(primitiveObject);
+	updatePrimitives();
 }
