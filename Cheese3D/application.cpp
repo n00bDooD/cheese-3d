@@ -10,6 +10,8 @@
 #include "CheeseRenderer.h"
 #include "ShadingBatch.h"
 #include "Material.h"
+#include "Primitive.h"
+#include "Quad.h"
 #include "Shader.h"
 #include "Vertex.h"
 #include "shaders.h"
@@ -47,17 +49,24 @@ int application( void ){
 
 	GLuint loopErr = 0;
 	{
+
+		quad* rectangle = new quad();
+
 		shader* defaultShader = new shader(fragmentSource,vertexSource);
-		material* defaultMaterial = new material(defaultShader);
+		material* defaultMaterial = new material(*defaultShader);
 		vertexAttribLayout* defaultVertexData = new vertexAttribLayout();
 		shadingBatch* batch = new shadingBatch(*defaultVertexData,*defaultMaterial);
+
 		cheeseRenderer renderer(*batch);
 
 		delete batch;
+		delete defaultMaterial;
 		delete defaultVertexData;
-		
+		delete defaultShader;
+
+
 		while (running){
-			loopErr = update(loopErr,&renderer);
+			loopErr = update(loopErr,renderer);
 			if(loopErr != 0 && loopErr != 1){
 				break;
 			} else if (loopErr == 1){

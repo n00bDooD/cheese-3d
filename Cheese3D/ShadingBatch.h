@@ -4,6 +4,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 
+#include "Material.h"
 #include "Primitive.h"
 #include "Vertex.h"
 
@@ -14,7 +15,6 @@
 #include <GL\glfw.h>
 
 #include "VertexDataFormat.h"
-#include "Material.h"
 
 class shadingBatch {
 	friend class cheeseRenderer;
@@ -31,7 +31,7 @@ public:
 	~shadingBatch();
 	GLuint updateBatch (void);
 	void addPrimitive (primitive*);
-	shadingBatch(const vertexAttribLayout, const material);
+	shadingBatch(const vertexAttribLayout&, const material&);
 private:
 	void updatePrimitives (void);
 	void setVertexAttributes(void);

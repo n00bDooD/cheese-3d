@@ -14,6 +14,7 @@ class primitive {
 	bool cached_;
 public:
 	primitive();
+	primitive(const primitive&);
 	primitive(glm::vec3);
 	primitive(glm::vec3,glm::quat);
 	primitive(glm::vec3,glm::quat,glm::vec3);

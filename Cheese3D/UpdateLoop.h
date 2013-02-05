@@ -4,6 +4,6 @@
 #include "Global.h"
 #include "CheeseRenderer.h"
 
-uint update(uint,cheeseRenderer*);
+uint update(uint,cheeseRenderer&);
 
 #endif

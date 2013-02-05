@@ -66,6 +66,9 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="Quad.cpp">
+      <Filter>Source Files\Rendering\Primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Initialize.h">
@@ -106,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>Header Files\Rendering\Primitives</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

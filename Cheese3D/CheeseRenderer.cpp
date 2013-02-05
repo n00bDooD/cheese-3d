@@ -17,14 +17,14 @@ GLuint cheeseRenderer::draw(void){
 	return 0;
 }
 
-cheeseRenderer::cheeseRenderer(shadingBatch batch){
-	addBatch(batch);
+cheeseRenderer::cheeseRenderer(shadingBatch& rbatch){
+	addBatch(rbatch);
 
 	initBatch(0);
 }
 
-void cheeseRenderer::addBatch(shadingBatch batch){
-	batches_.push_back(batch);
+void cheeseRenderer::addBatch(shadingBatch& rbatch){
+	batches_.push_back(rbatch);
 }
 
 void cheeseRenderer::initBatch(GLuint index) {
@@ -39,5 +39,5 @@ void cheeseRenderer::initBatch(GLuint index) {
 
 	//batches[index].material.compile(); TODO: Implement
 
-	//batches[index].definwVertexLayout(); TODO: Implement
+	//batches[index].defineVertexLayout(); TODO: Implement
 }

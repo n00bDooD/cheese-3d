@@ -9,22 +9,18 @@ primitive::primitive(){
 	rotation_ = quat();
 	cached_ = false;
 }
-primitive::primitive(vec3 position){
-	position_ = position;
+primitive::primitive(const primitive& other) : position_(other.position_), scale_(other.rotation_), rotation_(other.rotation_), cached_(other.cached_){
+}
+primitive::primitive(vec3 position) : position_(position) {
 	scale_ = vec3(1,1,1);
 	rotation_ = quat();
 	cached_ = false;
 }
-primitive::primitive(vec3 position,quat rotation){
-	position_ = position;
+primitive::primitive(vec3 position,quat rotation) : position_(position),rotation_(rotation){
 	scale_ = vec3(1,1,1);
-	rotation_ = rotation;
 	cached_ = false;
 }
-primitive::primitive(vec3 position,quat rotation,vec3 scale){
-	position_ = position;
-	scale_ = scale;
-	rotation_ = rotation;
+primitive::primitive(vec3 position,quat rotation,vec3 scale): position_(position), scale_(rotation), rotation_(scale){
 	cached_ = false;
 }
 

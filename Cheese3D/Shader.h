@@ -3,7 +3,6 @@
 
 #include <stdlib.h>
 #include <iostream>
-#include "Material.h"
 
 #define GLEW_STATIC
 #include <GL\glew.h>
@@ -21,6 +20,7 @@ protected:
 	bool compiled_;
 	const char* fragmentSource_;
 	const char* vertexSource_;
+	void deallocate();
 public:
 	shader(const char*,const char*);
 	void compileShader();

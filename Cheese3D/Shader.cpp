@@ -6,6 +6,14 @@ shader::shader(const char* fragmentSource,const char* vertexSource) {
 	compiled_ = false;
 }
 
+void shader::deallocate(){
+	glDeleteShader(fragmentShader_);
+	glDeleteShader(vertexShader_);
+	glDeleteProgram(shader_);
+	glDetachShader(shader_,vertexShader_);
+	glDetachShader(shader_,fragmentShader_);
+}
+
 void shader::compileShader(){
 	vertexShader_ = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader_,1 , &vertexSource_, NULL);

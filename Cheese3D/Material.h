@@ -7,7 +7,8 @@ class material {
 protected:
 	shader shader_;
 public:
-	material (const shader* shaderProgram);
+	material (const shader&);
+	~material();
 
 	void compileShader();
 } ;

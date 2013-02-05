@@ -4,11 +4,12 @@
 
 shadingBatch::~shadingBatch(){
 	primitives_.clear();
+	vertices_.clear();
+	elements_.clear();
 }
 
-shadingBatch::shadingBatch(const vertexAttribLayout layout, const material batchMaterial){
-	dataFormat_ = layout;
-	batchMaterial_ = batchMaterial;
+shadingBatch::shadingBatch(const vertexAttribLayout& layout, const material& batchMaterial) : dataFormat_(layout),batchMaterial_(batchMaterial){
+	
 }
 
 GLuint shadingBatch::updateBatch(void){
