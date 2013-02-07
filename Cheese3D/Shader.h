@@ -3,12 +3,7 @@
 
 #include <stdlib.h>
 #include <iostream>
-
-#define GLEW_STATIC
-#include <GL\glew.h>
-
-#define GLFWDLL
-#include <GL\glfw.h>
+#include "Global.h"
 
 class shader {
 	friend class material;
@@ -24,6 +19,7 @@ protected:
 public:
 	shader(const char*,const char*);
 	void compileShader();
+	GLuint getShader() const;
 	bool isCompiled() const;
 } ;
 

@@ -69,6 +69,9 @@
     <ClCompile Include="Quad.cpp">
       <Filter>Source Files\Rendering\Primitives</Filter>
     </ClCompile>
+    <ClCompile Include="VertexDataFormat.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Initialize.h">
@@ -101,9 +104,6 @@
     <ClInclude Include="Vertex.h">
       <Filter>Header Files\Rendering\Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="VertexDataFormat.h">
-      <Filter>Header Files\Rendering\Primitives</Filter>
-    </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
@@ -112,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="Quad.h">
       <Filter>Header Files\Rendering\Primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexDataFormat.h">
+      <Filter>Header Files\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

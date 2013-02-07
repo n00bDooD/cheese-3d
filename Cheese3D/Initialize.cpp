@@ -15,7 +15,7 @@ unsigned int initialize (void){
 	}
 
 	if(!glfwOpenWindow(sizeX,sizeY,0,0,0,0,0,0,GLFW_WINDOW)){
-		return (GLuint)1002;
+		return (GLuint)OPEN_WINDOW_FAIL;
 	}
 	glfwSetWindowTitle (title);
 
@@ -42,14 +42,14 @@ unsigned int initGlew (void) {
 	GLenum err = glewInit();
 	if(err != 0){
 		std::cout << glewGetErrorString(err) << '\n';
-		return (GLuint)1001;
+		return (GLuint)GLEW_INIT_FAIL;
 	}
 	return (GLuint)0;
 }
 
 unsigned int initGlfw (void) {
 	if(!glfwInit()){
-		return (GLuint)1000;
+		return (GLuint)GLFW_INIT_FAIL;
 	}
 	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR,3); //Define the major OpenGL version to use
 	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR,3); //Define the minor OpenGL version to use

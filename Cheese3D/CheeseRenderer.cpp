@@ -7,37 +7,34 @@ GLuint cheeseRenderer::draw(void){
 
 
 	for(GLuint i = 0;i < batches_.size();i++){
-		batches_[i].updateBatch();
-
-
-
+		batches_[i]->updateBatch();
 	}
 
 	glfwSwapBuffers();
-	return 0;
+	return NO_ERROR;
 }
 
-cheeseRenderer::cheeseRenderer(shadingBatch& rbatch){
-	addBatch(rbatch);
+cheeseRenderer::cheeseRenderer(shadingBatch* pbatch){
+	addBatch(pbatch);
 
 	initBatch(0);
 }
 
-void cheeseRenderer::addBatch(shadingBatch& rbatch){
-	batches_.push_back(rbatch);
+void cheeseRenderer::addBatch(shadingBatch* pbatch){
+	batches_.push_back(pbatch);
 }
 
 void cheeseRenderer::initBatch(GLuint index) {
-	glGenVertexArrays(1,&batches_[index].VAO_);
-	glBindVertexArray(batches_[index].VAO_);
+	glGenVertexArrays(1,&batches_[index]->VAO_);
+	glBindVertexArray(batches_[index]->VAO_);
 
-	glGenBuffers(1,&batches_[index].VBO_);
-	glBindBuffer(GL_ARRAY_BUFFER, batches_[index].VBO_);
+	glGenBuffers(1,&batches_[index]->VBO_);
+	glBindBuffer(GL_ARRAY_BUFFER, batches_[index]->VBO_);
 
-	glGenBuffers(1, &batches_[index].EBO_);
-	glBindBuffer(GL_ARRAY_BUFFER, batches_[index].EBO_);
+	glGenBuffers(1, &batches_[index]->EBO_);
+	glBindBuffer(GL_ARRAY_BUFFER, batches_[index]->EBO_);
 
-	//batches[index].material.compile(); TODO: Implement
+	batches_[index]->batchMaterial_.compileShader();
 
-	//batches[index].defineVertexLayout(); TODO: Implement
+	batches_[index]->batchMaterial_.linkVertexAttributes(batches_[index]->dataFormat_);
 }

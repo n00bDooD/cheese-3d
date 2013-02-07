@@ -13,11 +13,11 @@
 
 class cheeseRenderer {
 private:
-	std::vector<shadingBatch> batches_;
+	std::vector<shadingBatch*> batches_;
 	void initBatch (GLuint);
 public:
-	cheeseRenderer(shadingBatch&);
-	void addBatch(shadingBatch&);
+	cheeseRenderer(shadingBatch*);
+	void addBatch(shadingBatch*);
 	GLuint draw(void);
 } ;
 

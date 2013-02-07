@@ -59,6 +59,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>C:\Users\SPL10Per\Desktop\Mappar och filer\libs\glfw-2.7.6.bin.WIN32\lib-msvc100;C:\Users\SPL10Per\Desktop\Mappar och filer\libs\rapidxml-1.13;C:\Users\SPL10Per\Desktop\Mappar och filer\libs\glm;C:\Users\SPL10Per\Desktop\Mappar och filer\libs\glew-1.9.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -79,6 +80,7 @@
     <ClCompile Include="application.cpp" />
     <ClCompile Include="UpdateLoop.cpp" />
     <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="VertexDataFormat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CheeseRenderer.h" />

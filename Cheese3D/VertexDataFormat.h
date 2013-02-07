@@ -1,16 +1,29 @@
 #ifndef VERTEXDATAFORMAT_H
 #define VERTEXDATAFORMAT_H
 
-#define GLFWDLL
-#include <GL\glfw.h>
+#include "Global.h"
+#include <vector>
 
-struct vertexAttribLayout {
-	GLuint index;
+struct vertexAttrib {
+	char* name;
 	GLint size;
 	GLenum type;
 	GLboolean normalized;
-	GLsizei stride;
-	GLuint* VAO_;
+
+	vertexAttrib();
+	vertexAttrib(const vertexAttrib&);
+	vertexAttrib(char*,GLint,GLenum,GLboolean);
+} ;
+
+class vertexDataFormat {
+	std::vector<vertexAttrib> vertexAttributes_;
+
+public:
+	int count() const; // { return vertexAttributes_.size() }
+	vertexAttrib& getAttribute(char*);
+	vertexAttrib& getAttribute(unsigned int);
+	void addAttribute(vertexAttrib&);
+	void deleteAttribute(char*);
 } ;
 
 #endif

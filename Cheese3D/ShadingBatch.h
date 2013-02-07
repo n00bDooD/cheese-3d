@@ -22,7 +22,7 @@ protected:
 	std::vector<primitive*> primitives_;
 	std::vector<vertex> vertices_;
 	std::vector<GLuint> elements_;
-	vertexAttribLayout dataFormat_;
+	vertexDataFormat dataFormat_;
 	material batchMaterial_;
 	GLuint VAO_;
 	GLuint VBO_;
@@ -30,11 +30,12 @@ protected:
 public:
 	~shadingBatch();
 	GLuint updateBatch (void);
+	GLuint renderBatch(void);
 	void addPrimitive (primitive*);
-	shadingBatch(const vertexAttribLayout&, const material&);
+	shadingBatch(const vertexDataFormat&, const material&);
 private:
 	void updatePrimitives (void);
-	void setVertexAttributes(void);
+	void bindBatch();
 } ;
 
 #endif

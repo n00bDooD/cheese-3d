@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cstring>
 #include <string>
+#include <vector>
 #include "CheeseRenderer.h"
 #include "ShadingBatch.h"
 #include "Material.h"
@@ -26,13 +27,14 @@ int application (void);
 
 int main (void){
 
-	int result = application();
+	int result;
 
-	if(result != 0){
-		return result; //TODO: Create code for showing a pop-up window if something bad has happened to the application.
-	} else {
-		return 0;
+	try{
+		result = application();
+	} catch (GLuint err){
+		return err; //TODO: Create code for showing a pop-up window
 	}
+	return result;
 }
 
 int application( void ){
@@ -49,31 +51,55 @@ int application( void ){
 
 	GLuint loopErr = 0;
 	{
+		std::vector<primitive*> primitives;
+		std::vector<shadingBatch> batches;
 
-		quad* rectangle = new quad();
+		primitives.push_back(new quad());
 
 		shader* defaultShader = new shader(fragmentSource,vertexSource);
 		material* defaultMaterial = new material(*defaultShader);
-		vertexAttribLayout* defaultVertexData = new vertexAttribLayout();
-		shadingBatch* batch = new shadingBatch(*defaultVertexData,*defaultMaterial);
+		vertexDataFormat* defaultDataFormat = new vertexDataFormat();
 
-		cheeseRenderer renderer(*batch);
+		vertexAttrib* position = new vertexAttrib("position",3,GL_FLOAT,false);
+		vertexAttrib* uv = new vertexAttrib("UV",2,GL_FLOAT,false);
+		vertexAttrib* normal = new vertexAttrib("normal",2,GL_FLOAT,true);
+		vertexAttrib* color = new vertexAttrib("color",4,GL_FLOAT,false);
+
+		defaultDataFormat->addAttribute( *position );
+		defaultDataFormat->addAttribute( *uv );
+		defaultDataFormat->addAttribute( *normal );
+		defaultDataFormat->addAttribute( *color );
+
+		shadingBatch* batch = new shadingBatch(*defaultDataFormat,*defaultMaterial);
+
+		batch->addPrimitive(primitives[0]); //TODO: Less magic numbers and more good programming please....
+
+		cheeseRenderer renderer(batch);
 
 		delete batch;
 		delete defaultMaterial;
-		delete defaultVertexData;
+		delete defaultDataFormat;
 		delete defaultShader;
+		delete position;
+		delete uv;
+		delete normal;
+		delete color;
 
 
 		while (running){
 			loopErr = update(loopErr,renderer);
-			if(loopErr != 0 && loopErr != 1){
+			if(loopErr != NO_ERROR && loopErr != CLOSE_APPLICATION){
 				break;
-			} else if (loopErr == 1){
-				loopErr = 0;
+			} else if (loopErr == CLOSE_APPLICATION){
+				loopErr = NO_ERROR;
 				break;
 			}
 		}
+
+		for(unsigned int i = 0;i < primitives.size();i++){
+			delete primitives[i];
+		}
+		primitives.clear();
 	}
 	glfwTerminate();
 	return loopErr;

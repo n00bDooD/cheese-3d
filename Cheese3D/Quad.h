@@ -12,7 +12,7 @@
 #include <glm\gtc\quaternion.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 
-class quad : protected primitive {
+class quad : public primitive {
 private:
 	vertex vertices_[NUMBER_OF_VERTICES_IN_A_QUAD];
 public:
@@ -24,6 +24,8 @@ public:
 	quad(std::vector<vertex>,glm::vec3);
 	quad(std::vector<vertex>,glm::vec3,glm::quat);
 	quad(std::vector<vertex>,glm::vec3,glm::quat,glm::vec3);
+
+	void setSize(float, float);
 
 	std::vector<vertex> getVertices();
 	std::vector<unsigned int> getElements();

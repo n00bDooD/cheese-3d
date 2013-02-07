@@ -2,6 +2,7 @@
 #define MATERIAL_H
 
 #include "Shader.h"
+#include "VertexDataFormat.h"
 
 class material {
 protected:
@@ -10,7 +11,9 @@ public:
 	material (const shader&);
 	~material();
 
+	shader getShader() const;
 	void compileShader();
+	void linkVertexAttributes(vertexDataFormat&);
 } ;
 
 #endif
