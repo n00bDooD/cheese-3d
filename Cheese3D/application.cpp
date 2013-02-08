@@ -76,7 +76,6 @@ int application( void ){
 
 		cheeseRenderer renderer(batch);
 
-		delete batch;
 		delete defaultMaterial;
 		delete defaultDataFormat;
 		delete defaultShader;

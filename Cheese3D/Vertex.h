@@ -2,6 +2,7 @@
 #define VERTEX_H
 
 #include <glm\glm.hpp>
+#include <vector>
 
 class vertex {
 protected:
@@ -24,6 +25,7 @@ public:
 	glm::lowp_ivec3 getNormal( void ) const;
 	glm::lowp_uvec2 getUV( void ) const;
 	glm::lowp_uvec4 getColor( void ) const;
+	std::vector<glm::float_t> getData ( void ) const; 
 #pragma endregion
 } ;
 

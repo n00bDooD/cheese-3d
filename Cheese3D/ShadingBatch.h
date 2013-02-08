@@ -20,7 +20,7 @@ class shadingBatch {
 	friend class cheeseRenderer;
 protected:
 	std::vector<primitive*> primitives_;
-	std::vector<vertex> vertices_;
+	std::vector<float> vertices_;
 	std::vector<GLuint> elements_;
 	vertexDataFormat dataFormat_;
 	material batchMaterial_;

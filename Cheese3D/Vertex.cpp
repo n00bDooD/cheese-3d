@@ -54,4 +54,27 @@ vertex::vertex(vec3 position,lowp_ivec3 normal,lowp_uvec2 UV,lowp_uvec4 color){
 	glm::lowp_uvec4 vertex::getColor( void ) const{
 		return color_;
 	}
+	std::vector<glm::float_t> vertex::getData ( void ) const{
+		std::vector<float_t> values;
+
+		vec3 pos = getPosition();
+		lowp_ivec3 normal = getNormal();
+		lowp_uvec2 UV = getUV();
+		lowp_uvec4 color = getColor();
+
+		values.push_back(pos.x);
+		values.push_back(pos.y);
+		values.push_back(pos.z);
+		values.push_back(normal.x);
+		values.push_back(normal.y);
+		values.push_back(normal.z);
+		values.push_back(UV.x);
+		values.push_back(UV.y);
+		values.push_back(color.x);
+		values.push_back(color.y);
+		values.push_back(color.z);
+		values.push_back(color.w);
+
+		return values;
+	}
 #pragma endregion
