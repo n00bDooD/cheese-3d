@@ -13,6 +13,7 @@ public:
 
 	shader getShader() const;
 	void compileShader();
+	void defineVertexAttributes(vertexDataFormat&);
 	void linkVertexAttributes(vertexDataFormat&);
 } ;
 

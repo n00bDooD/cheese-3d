@@ -19,6 +19,7 @@ GLuint shader::getShader() const{
 }
 
 void shader::compileShader(){
+	GLuint error = glGetError();
 	GLint status = 0;
 	vertexShader_ = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader_,1 , &vertexSource_, NULL);
@@ -32,7 +33,7 @@ void shader::compileShader(){
 		throw VERTEX_SHADER_COMPILE_FAIL;
 	}
 	
-	fragmentShader_ = glCreateShader(GL_FRAGMENT_SHADER);
+	fragmentShader_ = glCreateShader(GL_FRAGMENT_SHADER); //WHY ERROR HERE !?
 	glShaderSource(fragmentShader_,1 , &fragmentSource_, NULL);
 	glCompileShader(fragmentShader_);
 
@@ -49,9 +50,9 @@ void shader::compileShader(){
 	glAttachShader(shader_,vertexShader_);
 	glAttachShader(shader_,fragmentShader_);
 
-	glLinkProgram(shader_);
-
 	glBindFragDataLocation( shader_, 0, "outColor" );
+
+	glLinkProgram(shader_);
 
 	fragmentSource_ = "";
 	vertexSource_ = "";
@@ -59,6 +60,8 @@ void shader::compileShader(){
 	if(status == 1){
 		status = 0;
 	}
+
+	error = glGetError();
 
 	if(status != 0){
 		deallocate();

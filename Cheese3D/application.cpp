@@ -61,7 +61,7 @@ int application( void ){
 		vertexDataFormat* defaultDataFormat = new vertexDataFormat();
 
 		vertexAttrib* position = new vertexAttrib("position",3,GL_FLOAT,false);
-		vertexAttrib* uv = new vertexAttrib("UV",2,GL_FLOAT,false);
+		vertexAttrib* uv = new vertexAttrib("texcoords",2,GL_FLOAT,false);
 		vertexAttrib* normal = new vertexAttrib("normal",2,GL_FLOAT,true);
 		vertexAttrib* color = new vertexAttrib("color",4,GL_FLOAT,false);
 
@@ -83,7 +83,6 @@ int application( void ){
 		delete uv;
 		delete normal;
 		delete color;
-
 
 		while (running){
 			loopErr = update(loopErr,renderer);

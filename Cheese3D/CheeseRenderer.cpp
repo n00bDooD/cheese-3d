@@ -25,16 +25,22 @@ void cheeseRenderer::addBatch(shadingBatch* pbatch){
 }
 
 void cheeseRenderer::initBatch(GLuint index) {
-	glGenVertexArrays(1,&batches_[index]->VAO_);
-	glBindVertexArray(batches_[index]->VAO_);
+	if(!batches_[index]->initiated_){
+		glGenVertexArrays(1,&batches_[index]->VAO_);
+		glBindVertexArray(batches_[index]->VAO_);
 
-	glGenBuffers(1,&batches_[index]->VBO_);
-	glBindBuffer(GL_ARRAY_BUFFER, batches_[index]->VBO_);
+		glGenBuffers(1,&batches_[index]->VBO_);
+		glBindBuffer(GL_ARRAY_BUFFER, batches_[index]->VBO_);
 
-	glGenBuffers(1, &batches_[index]->EBO_);
-	glBindBuffer(GL_ARRAY_BUFFER, batches_[index]->EBO_);
+		glGenBuffers(1, &batches_[index]->EBO_);
+		glBindBuffer(GL_ARRAY_BUFFER, batches_[index]->EBO_);
 
-	batches_[index]->batchMaterial_.compileShader();
+		batches_[index]->batchMaterial_.compileShader();
 
-	batches_[index]->batchMaterial_.linkVertexAttributes(batches_[index]->dataFormat_);
+		batches_[index]->batchMaterial_.defineVertexAttributes(batches_[index]->dataFormat_);
+
+		batches_[index]->batchMaterial_.linkVertexAttributes(batches_[index]->dataFormat_);
+
+		batches_[index]->initiated_ = true;
+	}
 }

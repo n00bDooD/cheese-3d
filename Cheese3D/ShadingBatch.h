@@ -24,6 +24,7 @@ protected:
 	std::vector<GLuint> elements_;
 	vertexDataFormat dataFormat_;
 	material batchMaterial_;
+	bool initiated_;
 	GLuint VAO_;
 	GLuint VBO_;
 	GLuint EBO_;

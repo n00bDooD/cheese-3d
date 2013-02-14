@@ -9,7 +9,7 @@ shadingBatch::~shadingBatch(){
 }
 
 shadingBatch::shadingBatch(const vertexDataFormat& layout, const material& batchMaterial) : dataFormat_(layout),batchMaterial_(batchMaterial){
-	
+	initiated_ = false;
 }
 
 GLuint shadingBatch::updateBatch(void){
@@ -39,7 +39,7 @@ void shadingBatch::updatePrimitives(void){
 			rebuild = true;
 		}
 	}
-	if(rebuild){
+	if(rebuild && initiated_){
 
 		bindBatch();
 
@@ -65,6 +65,7 @@ void shadingBatch::updatePrimitives(void){
 			}
 			vertices_.insert(vertices_.end(), ab.begin(), ab.end());
 		}
+
 
 		glBufferData( GL_ARRAY_BUFFER, sizeof( float ) * vertices_.size(), vertices_.data(), GL_STATIC_DRAW );
 		glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof( GLuint ) * elements_.size(), elements_.data(), GL_STATIC_DRAW );
