@@ -8,15 +8,19 @@ shadingBatch::~shadingBatch(){
 	elements_.clear();
 }
 
-shadingBatch::shadingBatch(const vertexDataFormat& layout, const material& batchMaterial) : dataFormat_(layout),batchMaterial_(batchMaterial){
+shadingBatch::shadingBatch(const vertexDataFormat& layout, const material& r_batchMaterial) : dataFormat_(layout),batchMaterial_(r_batchMaterial){
 	initiated_ = false;
 }
 
 GLuint shadingBatch::updateBatch(void){
 	GLuint err = 0;
 
+	CheckOpenGL();
+
 	updatePrimitives();
 	renderBatch();
+
+	CheckOpenGL();
 
 	return err;
 }

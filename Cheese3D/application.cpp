@@ -52,37 +52,28 @@ int application( void ){
 	GLuint loopErr = 0;
 	{
 		std::vector<primitive*> primitives;
-		std::vector<shadingBatch> batches;
 
 		primitives.push_back(new quad());
 
-		shader* defaultShader = new shader(fragmentSource,vertexSource);
-		material* defaultMaterial = new material(*defaultShader);
-		vertexDataFormat* defaultDataFormat = new vertexDataFormat();
+		shader defaultShader(fragmentSource,vertexSource);
+		material defaultMaterial(defaultShader);
+		vertexDataFormat defaultDataFormat;
 
-		vertexAttrib* position = new vertexAttrib("position",3,GL_FLOAT,false);
-		vertexAttrib* uv = new vertexAttrib("texcoords",2,GL_FLOAT,false);
-		vertexAttrib* normal = new vertexAttrib("normal",2,GL_FLOAT,true);
-		vertexAttrib* color = new vertexAttrib("color",4,GL_FLOAT,false);
+		vertexAttrib position("position",3,GL_FLOAT,false);
+		vertexAttrib uv("texcoords",2,GL_FLOAT,false);
+		vertexAttrib normal("normal",2,GL_FLOAT,true);
+		vertexAttrib color("color",4,GL_FLOAT,false);
 
-		defaultDataFormat->addAttribute( *position );
-		defaultDataFormat->addAttribute( *uv );
-		defaultDataFormat->addAttribute( *normal );
-		defaultDataFormat->addAttribute( *color );
+		defaultDataFormat.addAttribute( position );
+		defaultDataFormat.addAttribute( uv );
+		defaultDataFormat.addAttribute( normal );
+		defaultDataFormat.addAttribute( color );
 
-		shadingBatch* batch = new shadingBatch(*defaultDataFormat,*defaultMaterial);
+		shadingBatch batch(defaultDataFormat,defaultMaterial);
 
-		batch->addPrimitive(primitives[0]); //TODO: Less magic numbers and more good programming please....
+		batch.addPrimitive(primitives[0]); //TODO: Less magic numbers and more good programming please....
 
 		cheeseRenderer renderer(batch);
-
-		delete defaultMaterial;
-		delete defaultDataFormat;
-		delete defaultShader;
-		delete position;
-		delete uv;
-		delete normal;
-		delete color;
 
 		while (running){
 			loopErr = update(loopErr,renderer);
@@ -93,7 +84,6 @@ int application( void ){
 				break;
 			}
 		}
-
 		for(unsigned int i = 0;i < primitives.size();i++){
 			delete primitives[i];
 		}

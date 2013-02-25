@@ -19,20 +19,14 @@ unsigned int initialize (void){
 	}
 	glfwSetWindowTitle (title);
 
-	error = glGetError();
+	CheckOpenGL();
 	if(error != 0){
 		return error;
 	}
 
 	error = initGlew();
-	if(error != 0){
-		return error;
-	}
 
-	error = glGetError();
-	if(error != 0){
-		return error;
-	}
+	CheckOpenGL();
 
 	return (GLuint)0;
 }

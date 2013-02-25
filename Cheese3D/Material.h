@@ -3,6 +3,7 @@
 
 #include "Shader.h"
 #include "VertexDataFormat.h"
+#include "Debug.h"
 
 class material {
 protected:

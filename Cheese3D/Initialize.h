@@ -3,6 +3,7 @@
 
 #include "Global.h"
 #include <iostream>
+#include "Debug.h"
 
 #define GLEW_STATIC
 #include <GL\glew.h>

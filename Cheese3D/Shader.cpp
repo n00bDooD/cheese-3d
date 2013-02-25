@@ -19,7 +19,7 @@ GLuint shader::getShader() const{
 }
 
 void shader::compileShader(){
-	GLuint error = glGetError();
+	CheckOpenGL();
 	GLint status = 0;
 	vertexShader_ = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader_,1 , &vertexSource_, NULL);
@@ -61,7 +61,7 @@ void shader::compileShader(){
 		status = 0;
 	}
 
-	error = glGetError();
+	CheckOpenGL();
 
 	if(status != 0){
 		deallocate();

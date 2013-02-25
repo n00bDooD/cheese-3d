@@ -86,6 +86,7 @@
     <ClInclude Include="CheeseRenderer.h" />
     <ClInclude Include="DataLoader.h" />
     <ClInclude Include="DataValue.h" />
+    <ClInclude Include="Debug.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Initialize.h" />
     <ClInclude Include="Material.h" />

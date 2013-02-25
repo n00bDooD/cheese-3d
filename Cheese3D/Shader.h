@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "Global.h"
+#include "Debug.h"
 
 class shader {
 	friend class material;
